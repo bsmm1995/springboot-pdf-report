@@ -53,9 +53,7 @@ public class PdfGeneratorImpl implements PdfGenerator {
         ITextRenderer renderer = new ITextRenderer();
         renderer.setDocumentFromString(processedHtml, "http://localhost:8080");
 
-        renderer.layout();
-        renderer.createPDF(target, false);
-        renderer.finishPDF();
+        renderer.createPDF(target, true);
 
         return target.toByteArray();
     }

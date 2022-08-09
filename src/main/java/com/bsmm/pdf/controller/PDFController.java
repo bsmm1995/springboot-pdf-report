@@ -23,7 +23,7 @@ public class PDFController {
     public ResponseEntity<ByteArrayResource> iText(final HttpServletRequest request, final HttpServletResponse response) {
         ByteArrayResource resource = new ByteArrayResource(pdfGenerator.createItextPdf("order", request, response));
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=file.pdf")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=iText.pdf")
                 .contentType(MediaType.APPLICATION_PDF)
                 .contentLength(resource.contentLength())
                 .body(resource);
@@ -33,7 +33,7 @@ public class PDFController {
     public ResponseEntity<ByteArrayResource> openPDF(final HttpServletRequest request, final HttpServletResponse response) {
         ByteArrayResource resource = new ByteArrayResource(pdfGenerator.createOpenPdf("order", request, response));
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=file.pdf")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=openPDF.pdf")
                 .contentType(MediaType.APPLICATION_PDF)
                 .contentLength(resource.contentLength())
                 .body(resource);
