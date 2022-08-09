@@ -21,12 +21,18 @@ public class PDFController {
 
     @GetMapping("/itext")
     public ResponseEntity<Object> itext(final HttpServletRequest request, final HttpServletResponse response) {
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=file.pdf").contentType(MediaType.APPLICATION_PDF).body(pdfGenerator.createItextPdf("order.html", request, response));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=file.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdfGenerator.createItextPdf("templatePDF", request, response));
     }
 
     @GetMapping("/open")
     public ResponseEntity<ByteArrayResource> openPDF(final HttpServletRequest request, final HttpServletResponse response) {
-        ByteArrayResource inputStreamResourcePDF = new ByteArrayResource(pdfGenerator.createOpenPdf("templatePDF.html", request, response));
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=file.pdf").contentType(MediaType.APPLICATION_PDF).contentLength(inputStreamResourcePDF.contentLength()).body(inputStreamResourcePDF);
+        ByteArrayResource inputStreamResourcePDF = new ByteArrayResource(pdfGenerator.createOpenPdf("order", request, response));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=file.pdf")
+                .contentType(MediaType.APPLICATION_PDF).contentLength(inputStreamResourcePDF.contentLength())
+                .body(inputStreamResourcePDF);
     }
 }
